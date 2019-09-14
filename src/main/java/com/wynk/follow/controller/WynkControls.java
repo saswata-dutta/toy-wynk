@@ -2,14 +2,17 @@ package com.wynk.follow.controller;
 
 import com.wynk.follow.controller.requests.CreateUser;
 import com.wynk.follow.controller.requests.Follow;
+import com.wynk.follow.controller.requests.PublishSong;
 import com.wynk.follow.controller.requests.UnFollow;
 import com.wynk.follow.controller.responses.FollowCountStatus;
 import com.wynk.follow.controller.responses.FollowStatus;
 import com.wynk.follow.controller.responses.PlaylistStatus;
 import com.wynk.follow.controller.responses.PopularArtistStatus;
 import com.wynk.follow.controller.responses.PopularSongStatus;
+import com.wynk.follow.controller.responses.PublishSongStatus;
 import com.wynk.follow.controller.responses.UnFollowStatus;
 import com.wynk.follow.service.PopularityStats;
+import com.wynk.follow.service.SongAction;
 import com.wynk.follow.service.UserAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -33,6 +36,7 @@ public class WynkControls {
 
   @Autowired private UserAction userAction;
   @Autowired private PopularityStats popularityStats;
+  @Autowired private SongAction songAction;
 
   @PostMapping("/create")
   public boolean create(@RequestBody @Valid CreateUser request) {
@@ -53,6 +57,13 @@ public class WynkControls {
     boolean result = userAction.unfollow(request.getUser(), artistIds);
     if (result) return new UnFollowStatus(request.getUser(), artistIds);
     return UnFollowStatus.ERROR;
+  }
+
+  @PostMapping("/publish")
+  public @ResponseBody PublishSongStatus publishSong(@RequestBody @Valid PublishSong request) {
+    boolean result = songAction.publish(request.getSong(), request.getArtists());
+    if (result) return new PublishSongStatus("ok", "song published against artists");
+    return new PublishSongStatus("failed", "invalid input parameters");
   }
 
   @GetMapping("/playlist")

@@ -1,6 +1,5 @@
 package com.wynk.follow.repository.impl;
 
-import com.wynk.follow.entity.Following;
 import com.wynk.follow.entity.Publication;
 import com.wynk.follow.repository.PublicationRepo;
 import org.springframework.stereotype.Component;
@@ -10,8 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,7 +22,7 @@ public class MockPublicationRepo implements PublicationRepo {
   }
 
   @Override
-  public boolean create(@NotNull String songId, @NotEmpty List<String> artistIds) {
+  public boolean create(@NotNull String songId, @NotEmpty Set<String> artistIds) {
     List<Publication> newPublications =
         artistIds.stream()
             .map(artist -> new Publication(artist, songId))
