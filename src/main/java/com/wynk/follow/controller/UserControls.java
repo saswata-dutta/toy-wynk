@@ -5,6 +5,8 @@ import com.wynk.follow.controller.requests.Follow;
 import com.wynk.follow.controller.requests.UnFollow;
 import com.wynk.follow.controller.responses.FollowStatus;
 import com.wynk.follow.controller.responses.UnFollowStatus;
+import com.wynk.follow.service.UserAction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +17,13 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/wynk", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class User {
+public class UserControls {
+
+  @Autowired private UserAction userAction;
 
   @PostMapping("/create")
   public boolean create(@RequestBody @Valid CreateUser request) {
-    return true;
+    return userAction.create(request.getUser(), request.getName());
   }
 
   @PostMapping("/follow")
