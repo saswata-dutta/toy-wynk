@@ -7,6 +7,8 @@ import java.util.Set;
 
 public interface PublicationRepo {
   boolean create(@NotNull String songId, @NotEmpty List<String> artistIds);
+
   Set<String> songs(@NotNull String artistId);
+
   Set<String> artists(@NotNull String songId);
 }

@@ -10,6 +10,8 @@ import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class MockUserRepo implements UserRepo {
@@ -32,5 +34,10 @@ public class MockUserRepo implements UserRepo {
     }
 
     return notFound;
+  }
+
+  @Override
+  public Set<String> getAll() {
+    return users.stream().map(it -> it.getId()).collect(Collectors.toSet());
   }
 }
