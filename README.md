@@ -10,12 +10,12 @@ song
     id
     name
 
-playlist
+playlist (join table)
     id
     name
     user-id
 
-playlist-song
+playlist-song (join table)
     playlist-id
     song-id
 
