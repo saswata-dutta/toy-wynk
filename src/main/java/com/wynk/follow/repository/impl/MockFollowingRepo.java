@@ -78,4 +78,9 @@ public class MockFollowingRepo implements FollowingRepo {
   public long followerCount(@NotNull String artistId) {
     return followings.stream().filter(it -> it.getArtistId().equals(artistId)).count();
   }
+
+  @Override
+  public Set<String> getAllUsers() {
+    return followings.stream().map(Following::getUserId).collect(Collectors.toSet());
+  }
 }

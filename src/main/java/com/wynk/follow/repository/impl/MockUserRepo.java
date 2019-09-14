@@ -38,6 +38,6 @@ public class MockUserRepo implements UserRepo {
 
   @Override
   public Set<String> getAll() {
-    return users.stream().map(it -> it.getId()).collect(Collectors.toSet());
+    return users.stream().map(User::getId).collect(Collectors.toSet());
   }
 }

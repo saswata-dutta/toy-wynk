@@ -5,6 +5,8 @@ import com.wynk.follow.repository.UserRepo;
 import com.wynk.follow.service.PopularityStats;
 import com.wynk.follow.service.UserAction;
 import com.wynk.follow.utils.CollectionUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PopularityStatsImpl implements PopularityStats {
+  Logger logger = LoggerFactory.getLogger(PopularityStatsImpl.class);
 
   @Autowired private FollowingRepo followingRepo;
   @Autowired private UserRepo userRepo;
@@ -28,12 +31,15 @@ public class PopularityStatsImpl implements PopularityStats {
 
   @Override
   public Optional<String> mostPopularSong() {
-    Set<String> users = userRepo.getAll();
+    Set<String> users = followingRepo.getAllUsers();
+    logger.info("found {} users", users.size());
+
     Map<String, Long> songCounts =
         users.stream()
             .flatMap(user -> userAction.playlist(user).stream())
             .collect(Collectors.groupingBy(it -> it, Collectors.counting()));
 
+    logger.info("found {} songs", songCounts.size());
     return CollectionUtils.getMaxEntry(songCounts);
   }
 
