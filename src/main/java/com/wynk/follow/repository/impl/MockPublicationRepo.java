@@ -9,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -29,5 +30,21 @@ public class MockPublicationRepo implements PublicationRepo {
 
     publications.addAll(newPublications);
     return true;
+  }
+
+  @Override
+  public Set<String> songs(@NotNull String artistId) {
+    return publications.stream()
+        .filter(it -> it.getArtistId().equals(artistId))
+        .map(Publication::getSongId)
+        .collect(Collectors.toSet());
+  }
+
+  @Override
+  public Set<String> artists(@NotNull String songId) {
+    return publications.stream()
+        .filter(it -> it.getSongId().equals(songId))
+        .map(Publication::getArtistId)
+        .collect(Collectors.toSet());
   }
 }

@@ -45,4 +45,20 @@ public class MockFollowingRepo implements FollowingRepo {
     followings.removeAll(unfollowed);
     return true;
   }
+
+  @Override
+  public Set<String> followers(@NotNull String artistId) {
+    return followings.stream()
+        .filter(it -> it.getArtistId().equals(artistId))
+        .map(Following::getUserId)
+        .collect(Collectors.toSet());
+  }
+
+  @Override
+  public Set<String> following(@NotNull String userId) {
+    return followings.stream()
+        .filter(it -> it.getUserId().equals(userId))
+        .map(Following::getArtistId)
+        .collect(Collectors.toSet());
+  }
 }
