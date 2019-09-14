@@ -1,5 +1,6 @@
 package com.wynk.follow.controller;
 
+import com.wynk.follow.controller.requests.CreateUser;
 import com.wynk.follow.controller.requests.Follow;
 import com.wynk.follow.controller.requests.UnFollow;
 import com.wynk.follow.controller.responses.FollowStatus;
@@ -14,7 +15,12 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/wynk", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class UserFollow {
+public class User {
+
+  @PostMapping("/create")
+  public boolean create(@RequestBody @Valid CreateUser request) {
+    return true;
+  }
 
   @PostMapping("/follow")
   public FollowStatus follow(@RequestBody @Valid Follow request) {
