@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +17,11 @@ import java.util.stream.Collectors;
 
 @Component
 public class MockFollowingRepo implements FollowingRepo {
-  private List<Following> followings;
+  private Set<Following> followings;
 
   @PostConstruct
   private void init() {
-    followings = new ArrayList<Following>();
+    followings = new HashSet<Following>();
   }
 
   @Override

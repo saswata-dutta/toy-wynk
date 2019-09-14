@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Optional;
@@ -67,7 +68,7 @@ public class WynkControls {
   }
 
   @GetMapping("/playlist")
-  public @ResponseBody PlaylistStatus playlist(@RequestParam("user") @NotNull String userId) {
+  public @ResponseBody PlaylistStatus playlist(@RequestParam("user") @NotEmpty String userId) {
     Set<String> songs = userAction.playlist(userId);
     return new PlaylistStatus(songs);
   }
@@ -86,7 +87,7 @@ public class WynkControls {
 
   @GetMapping("/follow/count")
   public @ResponseBody FollowCountStatus followCount(
-      @RequestParam("artist") @NotNull String artistId) {
+      @RequestParam("artist") @NotEmpty String artistId) {
     long count = popularityStats.followerCount(artistId);
     return new FollowCountStatus(artistId, count);
   }
