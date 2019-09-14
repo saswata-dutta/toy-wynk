@@ -26,7 +26,7 @@ public class MockFollowingRepo implements FollowingRepo {
   }
 
   @Override
-  public boolean create(@NotNull String userId, @NotEmpty List<String> artistIds) {
+  public boolean create(@NotNull String userId, @NotEmpty Set<String> artistIds) {
     List<Following> newFollowings =
         artistIds.stream()
             .map(artist -> new Following(userId, artist))
@@ -37,7 +37,7 @@ public class MockFollowingRepo implements FollowingRepo {
   }
 
   @Override
-  public boolean delete(@NotNull String userId, @NotEmpty List<String> artistIds) {
+  public boolean delete(@NotNull String userId, @NotEmpty Set<String> artistIds) {
     Set<String> artistSet = new HashSet<>(artistIds);
 
     List<Following> unfollowed =

@@ -28,13 +28,13 @@ public class UserActionImpl implements UserAction {
   }
 
   @Override
-  public boolean follow(@NotNull String userId, @NotEmpty List<String> artistIds) {
+  public boolean follow(@NotNull String userId, @NotEmpty Set<String> artistIds) {
     // TODO ensure foreign key constraints
     return followingRepo.create(userId, artistIds);
   }
 
   @Override
-  public boolean unfollow(@NotNull String userId, @NotEmpty List<String> artistIds) {
+  public boolean unfollow(@NotNull String userId, @NotEmpty Set<String> artistIds) {
     // TODO ensure foreign key constraints
     return followingRepo.delete(userId, artistIds);
   }

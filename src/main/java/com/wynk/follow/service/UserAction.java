@@ -8,9 +8,9 @@ import java.util.Set;
 public interface UserAction {
   boolean create(@NotNull String userId, String name);
 
-  boolean follow(@NotNull String userId, @NotEmpty List<String> artistIds);
+  boolean follow(@NotNull String userId, @NotEmpty Set<String> artistIds);
 
-  boolean unfollow(@NotNull String userId, @NotEmpty List<String> artistIds);
+  boolean unfollow(@NotNull String userId, @NotEmpty Set<String> artistIds);
 
   Set<String> playlist(@NotNull String userId);
 }

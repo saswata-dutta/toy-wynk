@@ -7,9 +7,9 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface FollowingRepo {
-  boolean create(@NotNull String userId, @NotEmpty List<String> artistIds);
+  boolean create(@NotNull String userId, @NotEmpty Set<String> artistIds);
 
-  boolean delete(@NotNull String userId, @NotEmpty List<String> artistIds);
+  boolean delete(@NotNull String userId, @NotEmpty Set<String> artistIds);
 
   Set<String> followers(@NotNull String artistId);
 

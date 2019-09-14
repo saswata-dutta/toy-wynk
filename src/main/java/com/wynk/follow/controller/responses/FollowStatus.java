@@ -1,5 +1,6 @@
 package com.wynk.follow.controller.responses;
 
+import java.util.List;
 import java.util.Set;
 
 public class FollowStatus {
