@@ -28,7 +28,7 @@ public class MockSongRepo implements SongRepo {
 
     if (notFound) {
       songs.add(song);
-      logger.info("Created artist {}", song.getId());
+      logger.info("Created song {}", song.getId());
     }
 
     return notFound;
